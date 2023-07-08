@@ -16,10 +16,6 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
-    descripcion: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
     plataformas: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -34,11 +30,19 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     rating: {
-      type:DataTypes.DECIMAL(1,2),
+      type: DataTypes.DECIMAL(3, 2),
       allowNull: false,
       defaultValue: 0,
     },
-
+    descripcion: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    creado: {
+      type: DataTypes.BOOLEAN,  
+      dafautValue: true,
+    },
+    
    }, { timestamps: false }
   );
 };
