@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { Videogame } = require("../db");
-const infoCleaner = require("../utils/Cleaner");
+const {infoCleaner, objectCleaner} = require("../utils/Cleaner");
 const {
   API_KEY
 } = process.env;
@@ -8,11 +8,12 @@ const {
  //? POR ID
 
 const getVideogameById = async (id, source) => {
+
   const game =
     source === "API"
-      ? (await axios.get(
+      ? [objectCleaner((await axios.get(
           `https://api.rawg.io/api/games/${id}${API_KEY}`
-        )).data
+        )).data)]
       : await Videogame.findByPk(id);
   return game;
 };
@@ -25,7 +26,9 @@ const createVideogameDB = async (
   imagen,
   fecha_de_lanzamiento,
   rating,
-  descripcion
+  descripcion,
+  creado,
+  
 ) => {
   return await Videogame.create({
     nombre,
@@ -34,6 +37,8 @@ const createVideogameDB = async (
     fecha_de_lanzamiento,
     rating,
     descripcion,
+    creado,
+    
   });
 };
 
@@ -42,7 +47,6 @@ const createVideogameDB = async (
 
 
 const getAllVideogames = async () => {
-
   
   const videogamesBD = await Videogame.findAll();
 
@@ -66,21 +70,20 @@ const getAllVideogames = async () => {
 const getVideogameByName = async (nombre) => {
 
 
-
   const infoAPI = (await axios.get(
     `https://api.rawg.io/api/games?key=e3d33f7971374f45b3e1a1a1a54bb32b`
   )).data.results;
 
   const gamesAPI = infoCleaner(infoAPI);
 
-  const gameFiltered = gamesAPI.filter((game) => { game.nombre === nombre} );
+  const gameFiltered = gamesAPI.filter((element) => element.nombre === nombre)
+  
+  const gamesDB = await Videogame.findAll({where: {nombre: nombre}})
 
-  // const gamesDB = await Videogame.findAll({where: {nombre: nombre}});
+  return [...gamesDB, ...gameFiltered]
 
-  return gameFiltered;
-
-// return [...gamesDB, ...gameFiltered]
 };
+
 
 
 module.exports = {

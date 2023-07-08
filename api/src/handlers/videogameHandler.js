@@ -6,23 +6,15 @@ const {
   getAllVideogames,
 } = require("../controllers/videogameController");
 
-//? ejemplo
-
-const createVideogameHandler = async (req, res) => {
-  res.status(200).send("Aqui se crean los juegos nuevos VVV");
-};
-//? ejemplo
 
 const getVideogameHandler = async (req, res) => {
   const { name } = req.query;
 
   try {
     if (name) {
-      // res.status(200).send("Aqui van los videojuesgos por nombre");
       const response = await getVideogameByName(name);
       res.status(200).json(response);
     } else {
-      // res.status(200).send("Aqui van TODOS los videojuesgos");
       const response = await getAllVideogames();
       res.status(200).json(response);
     }
@@ -30,6 +22,7 @@ const getVideogameHandler = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 const getVideogameIdHandler = async (req, res) => {
   const { id } = req.params;
@@ -44,7 +37,6 @@ const getVideogameIdHandler = async (req, res) => {
   }
 };
 
-/*
 
 const createVideogameHandler = async (req, res) => {
   const {
@@ -54,6 +46,7 @@ const createVideogameHandler = async (req, res) => {
     fecha_de_lanzamiento,
     rating,
     descripcion,
+    creado,
   } = req.body;
 
   try {
@@ -64,15 +57,13 @@ const createVideogameHandler = async (req, res) => {
       fecha_de_lanzamiento,
       rating,
       descripcion,
+      creado
     );
     res.status(200).json(response);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
-
-
-*/
 
 module.exports = {
   getVideogameHandler,

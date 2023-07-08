@@ -12,8 +12,6 @@ videogameRouter.get("/", getVideogameHandler);
 
 videogameRouter.get("/:id", getVideogameIdHandler);
 
-// videogameRouter.get('/', getVideogameHandler); 
-
 videogameRouter.post("/", createVideogameHandler);
 
 module.exports = videogameRouter;
