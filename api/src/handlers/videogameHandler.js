@@ -44,6 +44,7 @@ const createVideogameHandler = async (req, res) => {
     imagen,
     fecha_de_lanzamiento,
     rating,
+    genero,
     descripcion,
     creado,
   } = req.body;
@@ -55,6 +56,7 @@ const createVideogameHandler = async (req, res) => {
       imagen,
       fecha_de_lanzamiento,
       rating,
+      genero,
       descripcion,
       creado
     );

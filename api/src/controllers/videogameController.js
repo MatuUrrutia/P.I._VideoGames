@@ -26,6 +26,7 @@ const createVideogameDB = async (
   imagen,
   fecha_de_lanzamiento,
   rating,
+  genero,
   descripcion,
   creado,
   
@@ -35,6 +36,7 @@ const createVideogameDB = async (
     plataformas,
     imagen,
     fecha_de_lanzamiento,
+    genero,
     rating,
     descripcion,
     creado,
@@ -80,7 +82,15 @@ const getVideogameByName = async (nombre) => {
   
   const gamesDB = await Videogame.findAll({where: {nombre: nombre}})
 
-  return [...gamesDB, ...gameFiltered]
+  const gamesCombined = [...gamesDB, ...gameFiltered];
+
+  if (gamesCombined.length > 0) {
+    return gamesCombined.slice(0, 15); 
+  } else {
+    throw new Error("Juego no encontrado");
+  }
+
+
 
 };
 

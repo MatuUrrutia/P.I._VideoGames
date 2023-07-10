@@ -33,14 +33,25 @@ module.exports = (sequelize) => {
       type: DataTypes.DECIMAL(3, 2),
       allowNull: false,
       defaultValue: 0,
+      
+    },
+    genero: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'El campo "genero" debe tener al menos un elemento',
+        },
+      },
     },
     descripcion: {
       type: DataTypes.TEXT,
       allowNull: true,
     },
     creado: {
-      type: DataTypes.BOOLEAN,  
-      dafautValue: true,
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
     },
     
    }, { timestamps: false }
