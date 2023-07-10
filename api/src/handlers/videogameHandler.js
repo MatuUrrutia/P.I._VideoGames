@@ -1,4 +1,3 @@
-const { Videogame } = require("../db"); //!COMPROBAR QUE FUNCIONA LA IMPORTACION DESDE LA DB o PROBAR DESDE MODELS VIDEOGAMES
 const {
   createVideogameDB,
   getVideogameById,

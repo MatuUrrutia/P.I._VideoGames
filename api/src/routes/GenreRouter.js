@@ -1,9 +1,9 @@
 const { Router } = require("express");
 
+const  getGenreHandler = require("../handlers/genreHandler");
+
 const genreRouter = Router();
 
-//! FALTA PONER LA RUTA U EL HANDLER (HA QUE IMPORTRLO)
-
-
+genreRouter.get("/",  getGenreHandler);
 
 module.exports = genreRouter;

@@ -35,6 +35,18 @@ const objectCleaner = (game) => {
   };
 }
 
+const genreCleaner = (arr) => {
+  return arr.map((game) => {
+    return {
+      id: game.id,
+      nombre: game.name,
+      genero: game.genres?.map((genre) => {
+        return genre.name;
+      }),
+    };
+  });
+};
 
-module.exports = {infoCleaner, objectCleaner}
+
+module.exports = {infoCleaner, objectCleaner, genreCleaner}
 

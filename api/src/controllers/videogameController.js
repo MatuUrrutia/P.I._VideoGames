@@ -11,9 +11,9 @@ const getVideogameById = async (id, source) => {
 
   const game =
     source === "API"
-      ? [objectCleaner((await axios.get(
+      ? objectCleaner((await axios.get(
           `https://api.rawg.io/api/games/${id}${API_KEY}`
-        )).data)]
+        )).data)
       : await Videogame.findByPk(id);
   return game;
 };
@@ -71,7 +71,7 @@ const getVideogameByName = async (nombre) => {
 
 
   const infoAPI = (await axios.get(
-    `https://api.rawg.io/api/games?key=e3d33f7971374f45b3e1a1a1a54bb32b`
+    `https://api.rawg.io/api/games${API_KEY}`
   )).data.results;
 
   const gamesAPI = infoCleaner(infoAPI);
