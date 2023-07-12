@@ -1,6 +1,7 @@
 const axios = require("axios");
 const { Videogame } = require("../db");
 const {infoCleaner, objectCleaner} = require("../utils/Cleaner");
+const { Op } = require('sequelize');
 const {
   API_KEY
 } = process.env;
@@ -69,31 +70,23 @@ const getAllVideogames = async () => {
 
     //? POR NOMBRE
 
-const getVideogameByName = async (nombre) => {
-
-
-  const infoAPI = (await axios.get(
-    `https://api.rawg.io/api/games${API_KEY}`
-  )).data.results;
-
+const getVideogameByName = async (name) => {
+  const infoAPI = (await axios.get(`https://api.rawg.io/api/games${API_KEY}`)).data.results;
   const gamesAPI = infoCleaner(infoAPI);
+  const lowercaseName = name.toLowerCase(); 
 
-  const gameFiltered = gamesAPI.filter((element) => element.nombre === nombre)
-  
-  const gamesDB = await Videogame.findAll({where: {nombre: nombre}})
+  const gameFiltered = gamesAPI.filter((element) => element.nombre.toLowerCase().includes(lowercaseName));
+
+  const gamesDB = await Videogame.findAll({ where: { nombre: { [Op.iLike]: `%${lowercaseName}%` } } }); 
 
   const gamesCombined = [...gamesDB, ...gameFiltered];
 
   if (gamesCombined.length > 0) {
-    return gamesCombined.slice(0, 15); 
+    return gamesCombined.slice(0, 15);
   } else {
     throw new Error("Juego no encontrado");
   }
-
-
-
 };
-
 
 
 module.exports = {

@@ -7,19 +7,24 @@ const {
 
 
 const getVideogameHandler = async (req, res) => {
-  const { name } = req.query;
 
+  const {name} = req.query
   try {
-    if (name) {
-      const response = await getVideogameByName(name);
-      res.status(200).json(response);
-    } else {
-      const response = await getAllVideogames();
-      res.status(200).json(response);
-    }
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+    if(name){
+    
+    const allVideogames = await getVideogameByName(name);
+    const videogameName = allVideogames.filter(videogame => videogame.nombre.toLowerCase().includes(name.toLowerCase()));
+    res.status(200).json(videogameName)
   }
+  else {
+    const response = await getAllVideogames()
+    res.status(200).json(response) 
+  }
+  
+} catch (error) {
+  res.status(400).json({error: error.message})
+}
+
 };
 
 

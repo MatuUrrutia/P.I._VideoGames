@@ -16,9 +16,15 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
-    plataformas: {
-      type: DataTypes.STRING,
+    plataformas:  {
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'El campo "plataformas" debe tener al menos un elemento',
+        },
+      },
     },
     imagen: {
       type: DataTypes.STRING,

@@ -68,3 +68,13 @@ const getVideogameByNameFromAPI = async (name) => {
   module.exports = {
     getVideogameByIdFromAPI,
   };
+
+  //!________________________________________________________________
+
+  genres.forEach(async (element) => {
+    const [dbGenre, created] = await Genres.findOrCreate({
+      where: { name: element },
+      defaults: { name: element },
+    });
+    await newGame.addGenres(dbGenre);
+  });
