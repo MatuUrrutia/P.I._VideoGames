@@ -19,9 +19,9 @@ function Card({ game }) {
         <h2>{nombre}</h2>
       </Link>
 
-      <h3>{fecha_de_lanzamiento}</h3>
+      {/* <h3>{fecha_de_lanzamiento}</h3>
       <h3>{plataformas}</h3>
-      <h3>{rating}</h3>
+      <h3>{rating}</h3> */}
       <h3>{genero}</h3>
 
       <div className="cardImage">

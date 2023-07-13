@@ -70,23 +70,21 @@ const getAllVideogames = async () => {
 
     //? POR NOMBRE
 
-const getVideogameByName = async (name) => {
-  const infoAPI = (await axios.get(`https://api.rawg.io/api/games${API_KEY}`)).data.results;
-  const gamesAPI = infoCleaner(infoAPI);
-  const lowercaseName = name.toLowerCase(); 
-
-  const gameFiltered = gamesAPI.filter((element) => element.nombre.toLowerCase().includes(lowercaseName));
-
-  const gamesDB = await Videogame.findAll({ where: { nombre: { [Op.iLike]: `%${lowercaseName}%` } } }); 
-
-  const gamesCombined = [...gamesDB, ...gameFiltered];
-
-  if (gamesCombined.length > 0) {
-    return gamesCombined.slice(0, 15);
-  } else {
-    throw new Error("Juego no encontrado");
-  }
-};
+    const getVideogameByName = async (name) => {
+      const allVideogames = await getAllVideogames();
+      const lowercaseName = name.toLowerCase();
+    
+      const gameFiltered = allVideogames.filter((element) =>
+        element.nombre.toLowerCase().includes(lowercaseName)
+      );
+    
+      if (gameFiltered.length > 0) {
+        return gameFiltered.slice(0, 15);
+      } else {
+        throw new Error("Juego no encontrado");
+      }
+    };
+    
 
 
 module.exports = {

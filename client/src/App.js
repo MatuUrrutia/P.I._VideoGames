@@ -3,6 +3,7 @@ import Home from "./views/home/home.comp";
 import Detail from "./views/detail/detail.comp";
 import Create from "./views/create/create.comp";
 import Landing from "./views/landing/landing.comp";
+import About from "./views/about/about.comp";
 
 import "./App.css";
 
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/home" component={Home} />
         <Route path="/home/:id" component={Detail} />
         <Route path="/create" component={Create} />
+        <Route path="/about" component={About} />
       </div>
     </BrowserRouter>
   );
