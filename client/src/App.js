@@ -40,6 +40,20 @@ function App() {
     setCurrentPage((prevPage) => (prevPage > 1 ? prevPage - 1 : 1));
   }
 
+  function handleFirstPage() {
+    handlePageChange(1);
+  }
+
+  function handleLastPage() {
+    handlePageChange(maxPage);
+  }
+
+  function handlePageChange(pageNumber) {
+    if (pageNumber >= 1 && pageNumber <= maxPage) {
+      setCurrentPage(pageNumber);
+    }
+  }
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -55,7 +69,9 @@ function App() {
               currentPage={currentPage} 
               maxPage={maxPage}  
               handleNextPage={handleNextPage}  
-              handlePreviousPage={handlePreviousPage} 
+              handlePreviousPage={handlePreviousPage}
+              handleFirstPage={handleFirstPage} 
+              handleLastPage={handleLastPage}
               />}/>
               <Route path="/home/:id" component={Detail} />
               <Route path="/create" component={Create} />

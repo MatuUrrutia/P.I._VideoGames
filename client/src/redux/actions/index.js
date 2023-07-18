@@ -10,6 +10,7 @@ export const CLEAR_GENRES = "CLEAR_GENRES";
 export const ERROR = "ERROR"; 
 
 export const ORDER = "ORDER"; 
+export const ORDER_RATING = "ORDER_RATING";  
 export const FILTER = "FILTER"; 
 export const FILTER_API_BD = "FILTER_API_BD"; 
 export const RESET_FILTERS = "RESET_FILTERS"; 
@@ -25,6 +26,7 @@ export function getVideogames() {
         payload: response.data,
       });
     } catch (error) {
+      alert("Error al obtener los videojuegos");
       console.error("Error al obtener los videojuegos:", error);
     }
   };
@@ -59,6 +61,7 @@ export function getById(id) {
         payload: response.data,
       });
     } catch (error) {
+      alert("ID no encontrado");
       console.error("Error al obtener el juego por ID:", error);
     }
   };
@@ -86,7 +89,6 @@ export function createGame(input) {
     }
   };
 }
-
 
 
 export function getGenres() {
@@ -117,6 +119,12 @@ export function orderGames(sortOption) {
   };
 }
 
+export function orderRating(order) {
+  return {
+    type: ORDER_RATING,
+    payload: order,
+  };
+}
 
 export function filterGame(filterOption) {
   return {

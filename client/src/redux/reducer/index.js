@@ -6,6 +6,7 @@ import {
   POST_GAME,
   GET_GENRES,
   CLEAR_GENRES,
+  ORDER_RATING,
   ERROR,
   ORDER,
   FILTER,
@@ -16,6 +17,7 @@ import {
 let initialState = {
   allVideogames: [],
   allGamesCopy: [],
+  allGamesCopy2: [],
   mainOrder: [],
   byName: [],
   allGenres: [],
@@ -31,6 +33,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         allVideogames: action.payload,
         allGamesCopy: action.payload,
+        allGamesCopy2: action.payload,
         mainOrder: action.payload,
       };
 
@@ -101,12 +104,28 @@ function rootReducer(state = initialState, action) {
         error: null,
       };
 
+    case ORDER_RATING:
+      let ordenRating;
+      if (action.payload === "1 A 5") {
+        ordenRating = state.allVideogames.slice().sort((a, b) => a.rating - b.rating);
+      } else if (action.payload === "5 A 1") {
+        ordenRating = state.allVideogames.slice().sort((a, b) => b.rating - a.rating);
+      } else {
+        ordenRating = state.mainOrder;
+      }
+      return {
+        ...state,
+        allVideogames: ordenRating,
+        error: null,
+      };
+
+
     case FILTER_API_BD:
       let filteredGames;
       if (action.payload === "Created") {
-        filteredGames = state.allGamesCopy.filter((game) => game.creado);
+        filteredGames = state.allVideogames.filter((game) => game.creado);
       } else if (action.payload === "API"){
-        filteredGames = state.allGamesCopy.filter((game) => !game.creado);
+        filteredGames = state.allVideogames.filter((game) => !game.creado);
       } else {filteredGames = state.allGamesCopy}
       return {
         ...state,
@@ -114,21 +133,17 @@ function rootReducer(state = initialState, action) {
         error: null,
       };
 
-    case FILTER:
-      return {
-        ...state,
-        allVideogames: state.allGamesCopy.filter((game) => {
-          if (game.genero) {
-            const genres = Array.isArray(game.genero)
-              ? game.genero
-              : [game.genero];
-            return genres.some((genre) => genre === action.payload);
-          }
-          return false;
-        }),
-        error: null,
-      };
 
+    case FILTER:
+        return {
+          ...state,
+          allVideogames: state.allVideogames.filter((game) => {
+            if (game.genero) {
+              return game.genero.some((genre) => genre === action.payload);
+            } else return state.allGamesCopy
+          }),
+          error: null,
+        };
 
 
     default:
@@ -137,3 +152,6 @@ function rootReducer(state = initialState, action) {
 }
 
 export default rootReducer;
+
+
+
