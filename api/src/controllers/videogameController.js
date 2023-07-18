@@ -1,7 +1,6 @@
 const axios = require("axios");
 const { Videogame } = require("../db");
 const {infoCleaner, objectCleaner} = require("../utils/Cleaner");
-const { Op } = require('sequelize');
 const {
   API_KEY
 } = process.env;

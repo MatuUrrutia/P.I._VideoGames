@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getById, clearGameDetail } from "../../redux/actions/index";
+import { Link } from "react-router-dom";
 
 function Detail() {
   const { id } = useParams();
@@ -32,7 +33,6 @@ function Detail() {
 
   return (
     <div>
-      <h1>Detail Page {id}</h1>
       <h1>{nombre}</h1>
       <h3>{fecha_de_lanzamiento}</h3>
       <h3>{plataformas}</h3>
@@ -41,6 +41,11 @@ function Detail() {
       <p>{descripcion}</p>
       <div>
         <img src={imagen} alt="Imagen del juego" height="300px" />
+      </div>
+      <div>
+        <Link to="/home">
+          <button>X</button>
+        </Link>
       </div>
     </div>
   );

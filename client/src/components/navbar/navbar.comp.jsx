@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import Filter from "../../views/filters/filters"
 import "./navbar.styles.css";
 
-function Navbar({ handleChange, handleSubmit }) {
+function Navbar({ handleChange, handleSubmit, handleNextPage, handlePreviousPage }) {
+  
   return (
     <div className="search-box">
       <Link to="/home">
@@ -16,10 +18,11 @@ function Navbar({ handleChange, handleSubmit }) {
         <button>New Game</button>
       </Link>
 
+      <Filter />
      
-        <button>Naxt Page</button>
-        <button>Previous Page</button>
+      <button onClick={handlePreviousPage}>Previous Page</button>
       
+      <button onClick={handleNextPage}>Next Page</button>
 
 
       <form onChange={handleChange}>

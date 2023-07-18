@@ -5,7 +5,10 @@
     to bottom,
     rgb(35, 0, 88) 0%,
     rgb(102, 0, 255) 100%
-);
+    );
+
+  background-size: cover;
+
 }
 
 .App-logo {

@@ -8,12 +8,10 @@ module.exports = (sequelize) => {
         primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        unique: true,
       },
       nombre: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
      }, { timestamps: false }
     );
