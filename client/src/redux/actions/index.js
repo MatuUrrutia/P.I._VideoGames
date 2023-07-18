@@ -109,18 +109,7 @@ export function getGenres() {
   };
 }
 
-export function clearGenres() {
-  return {
-    type: CLEAR_GENRES,
-  };
-}
 
-
-//!______________________________________
-
-
-
-// Acción para ordenar los juegos
 export function orderGames(sortOption) {
   return {
     type: ORDER,
@@ -128,13 +117,6 @@ export function orderGames(sortOption) {
   };
 }
 
-// Acción para filtrar por género
-// export function filterGame(filterOption) {
-//   return {
-//     type: FILTER,
-//     payload: filterOption,
-//   };
-// }
 
 export function filterGame(filterOption) {
   return {
@@ -144,7 +126,6 @@ export function filterGame(filterOption) {
 }
 
 
-// Acción para filtrar por API/BD
 export function filterApiBd(filterOption) {
   return {
     type: FILTER_API_BD,
@@ -152,9 +133,16 @@ export function filterApiBd(filterOption) {
   };
 }
 
-// Acción para resetear los filtros
 export function resetFilters() {
   return {
     type: RESET_FILTERS,
   };
 }
+
+
+
+// export function clearGenres() {
+//   return {
+//     type: CLEAR_GENRES,
+//   };
+// }

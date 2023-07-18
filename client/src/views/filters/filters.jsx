@@ -1,11 +1,12 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 import {
   filterApiBd,
   filterGame,
   orderGames,
   resetFilters,
+  getGenres,
 } from "../../redux/actions";
 import "./filter.styles.css";
 
@@ -14,6 +15,14 @@ function Filter() {
   const [filterGenre, setFilterGenre] = useState("Genero");
   const [filterApiBdt, setFilterApiBdt] = useState("Api-Creados");
   const [filterSort, setFilterSort] = useState("Ordenamiento");
+  const allGenres = useSelector((state) => state.allGenres);
+
+
+  useEffect(() => {
+    dispatch(getGenres());
+  }, [dispatch]);
+
+  console.log(allGenres)
 
   const handleApiBD = (e) => {
     setFilterApiBdt(e.target.value);
@@ -40,8 +49,8 @@ function Filter() {
   return (
     <div>
       <select placeholder="api-bd" onChange={handleApiBD} value={filterApiBdt}>
-        <option value="Api-Creados">API-CREADOS</option>
-        <option value="CREADOS">CREADOS</option>
+        <option value="API & Created">API & Created</option>
+        <option value="Created">Created</option>
         <option value="API">API</option>
       </select>
 
@@ -49,27 +58,10 @@ function Filter() {
 
       <select placeholder="genre" onChange={handleFilter} value={filterGenre}>
         <option value="Genero">Genero</option>
-        {[
-          "Action",
-          "Indie",
-          "Adventure",
-          "RPG",
-          "Strategy",
-          "Shooter",
-          "Casual",
-          "Simulation",
-          "Puzzle",
-          "Arcade",
-          "Platformer",
-          "Massively Multiplayer",
-          "Racing",
-          "Sports",
-          "Fighting",
-          "Family",
-          "Board Games",
-          "Educational",
-        ].map((genre) => (
-          <option value={genre}>{genre}</option>
+        {allGenres.map((genre) => (
+          <option key={genre.id} value={genre.nombre}>
+            {genre.nombre}
+          </option>
         ))}
       </select>
 
@@ -77,7 +69,7 @@ function Filter() {
 
       <select placeholder="order" onChange={handleSort} value={filterSort}>
         <option value="Ordenamiento">Ordenamiento</option>
-        {["az", "za"].map((genre) => (
+        {["a-z", "z-a"].map((genre) => (
           <option value={genre}>{genre}</option>
         ))}
       </select>

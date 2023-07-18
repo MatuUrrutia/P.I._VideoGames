@@ -49,11 +49,14 @@ function App() {
             <Navbar
               handleChange={handleChange}
               handleSubmit={handleSubmit}
-              handleNextPage={handleNextPage}
-              handlePreviousPage={handlePreviousPage}
             />
             <Switch>
-              <Route exact path="/home" render={() => <Home currentPage={currentPage} maxPage={maxPage} />}/>
+              <Route exact path="/home" render={() => <Home 
+              currentPage={currentPage} 
+              maxPage={maxPage}  
+              handleNextPage={handleNextPage}  
+              handlePreviousPage={handlePreviousPage} 
+              />}/>
               <Route path="/home/:id" component={Detail} />
               <Route path="/create" component={Create} />
               <Route path="/about" component={About} />

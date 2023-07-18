@@ -37,7 +37,7 @@ function Detail() {
       <h3>{fecha_de_lanzamiento}</h3>
       <h3>{plataformas}</h3>
       <h3>{rating}</h3>
-      <h3>{genero}</h3>
+      <h3>{genero.join(" | ")}</h3>
       <p>{descripcion}</p>
       <div>
         <img src={imagen} alt="Imagen del juego" height="300px" />

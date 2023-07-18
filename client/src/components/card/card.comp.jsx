@@ -15,7 +15,7 @@ function Card({ game }) {
         <h2>{nombre}</h2>
       </Link>
 
-      <h3>{genero}</h3>
+      <h3>{genero.join(" | ")}</h3>
 
       <div className="cardImage">
         <img src={imagen} alt="Imagen del personaje" height="300px" />

@@ -16,14 +16,12 @@ import {
 let initialState = {
   allVideogames: [],
   allGamesCopy: [],
+  mainOrder: [],
   byName: [],
   allGenres: [],
   gameDetail: [],
   newGames: [],
   error: null,
-
-
-
 };
 
 function rootReducer(state = initialState, action) {
@@ -33,6 +31,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         allVideogames: action.payload,
         allGamesCopy: action.payload,
+        mainOrder: action.payload,
       };
 
     case GET_BY_NAME:
@@ -65,37 +64,37 @@ function rootReducer(state = initialState, action) {
         allGenres: action.payload,
         error: null,
       };
-    
-    case CLEAR_GENRES:
+
+    // case CLEAR_GENRES:
+    //   return {
+    //     ...state,
+    //     allGenres: [],
+    //   };
+
+    case ERROR:
       return {
         ...state,
-        allGenres: [],
+        error: action.payload,
       };
-      
-      case ERROR:
-        return {
-          ...state,
-          error: action.payload,
-        };
-   
+
     case RESET_FILTERS:
       return {
         ...state,
         allVideogames: state.allGamesCopy,
         error: null,
       };
-            
+
     case ORDER:
       let orden;
-      if (action.payload === "az") {
+      if (action.payload === "a-z") {
         orden = state.allVideogames
           .slice()
           .sort((a, b) => a.nombre.localeCompare(b.nombre));
-      } else {
+      } else if (action.payload === "z-a")  {
         orden = state.allVideogames
-        .slice()
-        .sort((a, b) => b.nombre.localeCompare(a.nombre));
-      }
+          .slice()
+          .sort((a, b) => b.nombre.localeCompare(a.nombre));
+      } else {orden = state.mainOrder}
       return {
         ...state,
         allVideogames: orden,
@@ -104,42 +103,32 @@ function rootReducer(state = initialState, action) {
 
     case FILTER_API_BD:
       let filteredGames;
-      if (action.payload === "CREADOS") {
+      if (action.payload === "Created") {
         filteredGames = state.allGamesCopy.filter((game) => game.creado);
-      } else {
+      } else if (action.payload === "API"){
         filteredGames = state.allGamesCopy.filter((game) => !game.creado);
-      }
+      } else {filteredGames = state.allGamesCopy}
       return {
         ...state,
         allVideogames: filteredGames,
         error: null,
       };
 
-  //     case FILTER:
-  // return {
-  //   ...state,
-  //   allVideogames: state.allGamesCopy.filter((game) => {
-  //     if (game.genero) {
-  //       const genres = Array.isArray(game.genero) ? game.genero : [game.genero];
-  //       return genres.some((genre) => genre === action.payload);
-  //     }
-  //     return false;
-  //   }),
-  //   error: null,
-  // };
-
     case FILTER:
       return {
         ...state,
         allVideogames: state.allGamesCopy.filter((game) => {
           if (game.genero) {
-            const genres = game.genero.split("-");
-            return genres.some((genre) => genre.trim() === action.payload);
+            const genres = Array.isArray(game.genero)
+              ? game.genero
+              : [game.genero];
+            return genres.some((genre) => genre === action.payload);
           }
           return false;
         }),
         error: null,
       };
+
 
 
     default:
@@ -148,6 +137,3 @@ function rootReducer(state = initialState, action) {
 }
 
 export default rootReducer;
-
-
-

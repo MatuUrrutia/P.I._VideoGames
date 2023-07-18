@@ -12,10 +12,6 @@ function Create() {
 
   useEffect(() => {
     dispatch(getGenres());
-
-    return () => {
-      dispatch(clearGenres());
-    };
   }, [dispatch]);
 
 

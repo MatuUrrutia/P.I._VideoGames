@@ -9,9 +9,7 @@ const infoCleaner = (arr) => {
       imagen: game.background_image,
       fecha_de_lanzamiento: game.released,
       rating: game.rating,
-      genero: game.genres?.map((genre) => {
-        return genre.name;
-      }).join(" | "),
+      genero: game.genres?.map((genre) => genre.name),
       descripcion: game.description_raw,
     };
   });
@@ -28,9 +26,7 @@ const objectCleaner = (game) => {
     imagen: game.background_image,
     fecha_de_lanzamiento: game.released,
     rating: game.rating,
-    genero: game.genres?.map((genre) => {
-      return genre.name;
-    }).join(" | "),
+    genero: game.genres?.map((genre) => genre.name),
     descripcion: game.description_raw,
   };
 }

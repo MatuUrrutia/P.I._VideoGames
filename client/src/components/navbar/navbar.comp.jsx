@@ -1,38 +1,41 @@
-import { Link } from "react-router-dom";
-import Filter from "../../views/filters/filters"
+import { Link, useLocation } from "react-router-dom";
+import Filter from "../../views/filters/filters";
 import "./navbar.styles.css";
 
-function Navbar({ handleChange, handleSubmit, handleNextPage, handlePreviousPage }) {
-  
+function Navbar({ handleChange, handleSubmit }) {
+  const location = useLocation();
+  const isHome = location.pathname === "/home";
+
   return (
     <div className="search-box">
-      <Link to="/home">
-        <button>Home</button>
-      </Link>
+      <div>
+        <Link to="/home">
+          <button>Home</button>
+        </Link>
 
-      <Link to="/about">
-        <button>About</button>
-      </Link>
+        <Link to="/about">
+          <button>About</button>
+        </Link>
 
-      <Link to="/create">
-        <button>New Game</button>
-      </Link>
+        <Link to="/create">
+          <button>New Game</button>
+        </Link>
+      </div>
+      <br />
+      <div>
+        {isHome && <Filter />}
 
-      <Filter />
-     
-      <button onClick={handlePreviousPage}>Previous Page</button>
-      
-      <button onClick={handleNextPage}>Next Page</button>
-
-
-      <form onChange={handleChange}>
-        <input placeholder="Busqueda" type="search" />
-        <button type="submit" onClick={handleSubmit}>
-          Buscar
-        </button>
-      </form>
+        <form onChange={handleChange} style={isHome ? {} : { display: "none" }}>
+          <input placeholder="Busqueda" type="search" />
+          <button type="submit" onClick={handleSubmit}>
+            Buscar
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
 
 export default Navbar;
+
+
