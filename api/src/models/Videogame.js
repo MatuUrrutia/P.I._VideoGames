@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
       unique: true,
     },
     plataformas:  {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       
     },
     imagen: {

@@ -35,7 +35,7 @@ function Detail() {
     <div>
       <h1>{nombre}</h1>
       <h3>{fecha_de_lanzamiento}</h3>
-      <h3>{plataformas}</h3>
+      <h3>{plataformas.join(" | ")}</h3>
       <h3>{rating}</h3>
       <h3>{genero.join(" | ")}</h3>
       <p>{descripcion}</p>

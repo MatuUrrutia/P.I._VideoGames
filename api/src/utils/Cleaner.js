@@ -3,9 +3,7 @@ const infoCleaner = (arr) => {
     return {
       id: game.id,
       nombre: game.name,
-      plataformas: game.parent_platforms?.map((platforms) => {
-        return platforms.platform.name;
-      }).join(" | "),
+      plataformas: game.parent_platforms?.map((platforms) => platforms.platform.name),
       imagen: game.background_image,
       fecha_de_lanzamiento: game.released,
       rating: game.rating,
@@ -20,9 +18,7 @@ const objectCleaner = (game) => {
   return {
     id: game.id,
     nombre: game.name,
-    plataformas: game.parent_platforms?.map((platforms) => {
-      return platforms.platform.name;
-    }).join(" | "),
+    plataformas: game.parent_platforms?.map((platforms) => platforms.platform.name),
     imagen: game.background_image,
     fecha_de_lanzamiento: game.released,
     rating: game.rating,

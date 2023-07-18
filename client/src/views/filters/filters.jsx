@@ -40,9 +40,9 @@ function Filter() {
   }
 
   const handleResetFilters = () => {
-    setFilterGenre("Genero"); // Establecer el valor por defecto al hacer clic en Reset Filters
-    setFilterApiBdt("Api-Creados"); // Establecer el valor por defecto al hacer clic en Reset Filters
-    setFilterSort("Ordenamiento"); // Establecer el valor por defecto al hacer clic en Reset Filters
+    setFilterGenre("Genero"); 
+    setFilterApiBdt("Api-Creados"); 
+    setFilterSort("Ordenamiento"); 
     dispatch(resetFilters());
   };
 
