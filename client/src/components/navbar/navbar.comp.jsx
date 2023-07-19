@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import Filter from "../../views/filters/filters";
 import "./navbar.styles.css";
 
-function Navbar({ handleChange, handleSubmit }) {
+function Navbar({ handleChange, handleSubmit, currentPage, setCurrentPage }) {
   const location = useLocation();
   const isHome = location.pathname === "/home";
 
@@ -23,7 +23,9 @@ function Navbar({ handleChange, handleSubmit }) {
       </div>
       <br />
       <div>
-        {isHome && <Filter />}
+        {isHome && <Filter 
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage} />}
 
         <form onChange={handleChange} style={isHome ? {} : { display: "none" }}>
           <input placeholder="Busqueda" type="search" />

@@ -11,8 +11,9 @@ import {
 } from "../../redux/actions";
 import "./filter.styles.css";
 
-function Filter() {
+function Filter({currentPage, setCurrentPage}) {
   const dispatch = useDispatch();
+
   const [filterGenre, setFilterGenre] = useState("Genero");
   const [filterApiBdt, setFilterApiBdt] = useState("Api-Creados");
   const [filterSort, setFilterSort] = useState("Ordenamiento");
@@ -27,21 +28,25 @@ function Filter() {
   const handleApiBD = (e) => {
     setFilterApiBdt(e.target.value);
     dispatch(filterApiBd(e.target.value));
+    setCurrentPage(1);
   };
 
   function handleFilter(e) {
     setFilterGenre(e.target.value);
     dispatch(filterGame(e.target.value));
+    setCurrentPage(1);
   }
 
   function handleSort(e) {
     setFilterSort(e.target.value);
     dispatch(orderGames(e.target.value));
+    setCurrentPage(1);
   }
 
  function handleSortRating(e){
     setFilterSortRating(e.target.value);
     dispatch(orderRating(e.target.value));
+    setCurrentPage(1);
   }
 
 
@@ -50,8 +55,9 @@ function Filter() {
     setFilterGenre("Genero"); 
     setFilterApiBdt("Api-Creados"); 
     setFilterSort("Ordenamiento");
-    setFilterSortRating("Rating") 
+    setFilterSortRating("Rating")
     dispatch(resetFilters());
+    setCurrentPage(1);
   };
 
   return (

@@ -63,6 +63,8 @@ function App() {
             <Navbar
               handleChange={handleChange}
               handleSubmit={handleSubmit}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
             />
             <Switch>
               <Route exact path="/home" render={() => <Home 
