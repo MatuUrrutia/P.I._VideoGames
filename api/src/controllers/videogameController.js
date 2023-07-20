@@ -1,9 +1,11 @@
 const axios = require("axios");
-const { Videogame } = require("../db");
+const { Videogame, Genre } = require("../db");
 const {infoCleaner, objectCleaner} = require("../utils/Cleaner");
 const {
   API_KEY
 } = process.env;
+
+
 
  //? POR ID
 
@@ -31,7 +33,7 @@ const createVideogameDB = async (
   creado,
   
 ) => {
-  return await Videogame.create({
+  const juego = await Videogame.create({
     nombre,
     plataformas,
     imagen,
@@ -42,6 +44,19 @@ const createVideogameDB = async (
     creado,
     
   });
+//!_________RELACION DE LAS TABLAS______________
+//   const relacion = await genero.map(async (g)=>{ return await Genre.findOne({where: {nombre: g}})
+  
+// })
+
+// Promise.all(relacion)
+// .then((e) => {console.log(e) 
+//   const final = e.map((algo)=> algo.dataValues)
+//   juego.addGenre(final.map( g => g.id))})
+// // const relcaion = await Genre.findAll({where: {nombre: g}})
+// console.log(relacion)
+// return juego
+
 };
 
 

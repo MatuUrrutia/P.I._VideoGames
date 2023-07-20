@@ -17,33 +17,33 @@ module.exports = (sequelize) => {
     },
     plataformas:  {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      
+      allowNull: false,
     },
     imagen: {
-      type: DataTypes.STRING,
-
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
     fecha_de_lanzamiento: {
       type: DataTypes.DATEONLY,
-
+      allowNull: false,
     },
     rating: {
       type: DataTypes.DECIMAL(3, 2),
       defaultValue: 0,
-      
+      allowNull: false,
     },
     genero: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-
+      allowNull: false,
     },
     descripcion: {
       type: DataTypes.TEXT,
-
+      allowNull: false,
     },
     creado: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
-
+      
     },
     
    }, { timestamps: false }
